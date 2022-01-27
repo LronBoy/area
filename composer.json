@@ -2,6 +2,7 @@
     "name": "lronboy/area",
     "description": "全国统计用区划代码（12位）和城乡分类代码（3位），地域范围为国家统计局开展统计调查的全国31个省（自治区、直辖市），未包括我国台湾省、香港特别行政区和澳门特别行政区。",
     "type": "project",
+    "keywords": ["area","city","china city"],
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -14,5 +15,12 @@
             "email": "w@phpuse.cn"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=7.0",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-mbstring": "*",
+        "ext-curl": "*",
+        "ext-sqlite3": "*"
+    }
 }

@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59764ca7-6a34-48a1-b057-6ba2774717fc" name="Default Changelist" comment="" />
+    <list default="true" id="59764ca7-6a34-48a1-b057-6ba2774717fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Area.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GetPinYin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/HttpCurl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/chineseData.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -17,6 +27,14 @@
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
     </include_path>
   </component>
   <component name="ProjectId" id="247wk5tM41xgYF1DjeEbyIeC73m" />
@@ -26,11 +44,17 @@
     <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../demo.com" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../RL/crm-hospital" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\web\area\src\data" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -43,6 +67,10 @@
       <option name="presentableId" value="Default" />
       <updated>1642995072496</updated>
       <workItem from="1642995073727" duration="1143000" />
+      <workItem from="1643003356119" duration="8096000" />
+      <workItem from="1643075338909" duration="16170000" />
+      <workItem from="1643160339842" duration="24890000" />
+      <workItem from="1643246866890" duration="17535000" />
     </task>
     <servers />
   </component>
@@ -50,17 +78,61 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1643002828496">
+    <state x="462" y="466" key="#SQL_Dialects" timestamp="1643016544193">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1643002828496" />
+    <state x="462" y="466" key="#SQL_Dialects/0.0.1920.1050@0.0.1920.1050" timestamp="1643016544193" />
+    <state x="691" y="283" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1643254370784">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="691" y="283" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1643254370783" />
+    <state x="693" y="325" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1643254346497">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="693" y="325" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1643254346497" />
+    <state x="570" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1643176766595">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="570" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1643176766595" />
+    <state x="1199" y="440" key="ComposerInitDialogKey" timestamp="1643005514291">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1199" y="440" key="ComposerInitDialogKey/0.0.1920.1050@0.0.1920.1050" timestamp="1643005514291" />
+    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1643254369041">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1643254369041" />
+    <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1643168845412">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1050@0.0.1920.1050" timestamp="1643168845412" />
+    <state x="783" y="245" key="NewPhpClassDialog" timestamp="1643165536116">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="783" y="245" key="NewPhpClassDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1643165536116" />
+    <state x="776" y="448" key="NewPhpFileDialog" timestamp="1643166039402">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="776" y="448" key="NewPhpFileDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1643166039402" />
     <state x="830" y="226" key="RollbackChangesDialog" timestamp="1642995192513">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="830" y="226" key="RollbackChangesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1642995192513" />
-    <state x="461" y="169" key="SettingsEditor" timestamp="1642995117214">
+    <state x="464" y="259" width="1084" height="710" key="SettingsEditor" timestamp="1643168800033">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="461" y="169" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1642995117214" />
+    <state x="464" y="259" width="1084" height="710" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1643168800033" />
+    <state x="803" y="208" width="553" height="634" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1643187586552">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="803" y="208" width="553" height="634" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1643187586551" />
+    <state x="800" y="284" key="refactoring.ChangeSignatureDialog" timestamp="1643168242196">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="800" y="284" key="refactoring.ChangeSignatureDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1643168242196" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1643251688651">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1643251688651" />
   </component>
 </project>
