@@ -100,7 +100,8 @@ class GetPinYin
 		if($data === false || (isset($data['pinyin']) && !$data['pinyin'])){
 			return $char;
 		}else{
-			return strpos($data['pinyin'], ',') === false ? $data['pinyin'] : '';
+			$py_arr = explode(',', $data['pinyin']);
+			return $py_arr[0];
 		}
 	}
 }

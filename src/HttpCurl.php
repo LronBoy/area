@@ -62,7 +62,7 @@ class HttpCurl
 				continue;
 			}
 			
-			print_r(date('Y-m-d H:i:s').'---【html】处理：'.$path.".html\n");
+			# print_r(date('Y-m-d H:i:s').'---【html】处理：'.$url.".html\n");
 			if(!is_dir($path)){
 				@mkdir($path, 0777, true);
 				$func = self::$method . 'Request';
