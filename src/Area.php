@@ -113,6 +113,17 @@ class Area
 		self::handleData($data, self::LEVEL_COUNTY);
 	}
 	
+	
+	/**
+	 * description: 获取乡镇信息
+	 *+----------------------------------------------------------------------
+	 * @return void
+	 * @throws \Exception
+	 *+----------------------------------------------------------------------
+	 * @author: Admin  2022-02-07 16:01:38
+	 * @access: static
+	 * history: Modify record
+	 */
 	public static function getTown()
 	{
 		# 获取父级数据
@@ -122,7 +133,24 @@ class Area
 		# 请求数据处理
 		self::handleData($data, self::LEVEL_TOWN);
 	}
-
+	
+	/**
+	 * description: 获取村信息
+	 *+----------------------------------------------------------------------
+	 * @return void
+	 *+----------------------------------------------------------------------
+	 * @author: Admin  2022-02-07 16:02:58
+	 * @access: static
+	 * history: Modify record
+	 */
+	public static function getVillage(){
+		# 获取父级数据
+		$data = self::getParentData(self::LEVEL_TOWN);
+		# 获取请求URL
+		self::getHtmlUrl();
+		# 请求数据处理
+		self::handleData($data, self::LEVEL_VILLAGE);
+	}
 	
 	/**
 	 * description:初始化sqlite链接
@@ -157,9 +185,6 @@ class Area
 	             level          INT2            NOT NULL,
 	             uc_first       VARCHAR(8)      NOT NULL,
 	             pinyin         VARCHAR(255)    NOT NULL,
-	             code           MEDIUMINT       NOT NULL,
-	             modified       DATETIME        NOT NULL,
-	             created        DATETIME        NOT NULL,
 	             url            VARCHAR(128)    NOT NULL);';
 				static::$pdo->exec($createTable);
 			}
@@ -246,6 +271,8 @@ class Area
 			}
 			
 			$temp_str = strstr(strstr($html_str['data'], self::$area_tr[$level]),'table', true);
+			$temp_str = str_replace('（','', $temp_str);
+			$temp_str = str_replace('）','', $temp_str);
 			preg_match_all('/[\x{4e00}-\x{9fff}]+/u', $temp_str, $matches_arr);
 			if($level == self::LEVEL_PROVINCE){
 				preg_match_all('/\d+/', $temp_str, $matches_code_arr);
@@ -272,7 +299,7 @@ class Area
 	 * @access: static
 	 * history: Modify record
 	 */
-	private static function handleSqliteData($city_arr, $code_arr, $fid, $type, $type_code = [])
+	private static function handleSqliteData($city_arr, $code_arr, $fid, $type)
 	{
 		foreach ($city_arr as $key => $value){
 			$code           = str_pad($code_arr[$key], 12, 0);
@@ -288,13 +315,11 @@ class Area
 			
 			$pin_yin        = GetPinYin::getCharsPinYin($area['abbreviation']);
 			$uc_first       = strtoupper(mb_substr($pin_yin, 0, 1));
-			$urban_rural    = $type_code[$key] ?? 0;
-			$created        = $modified = date('Y-m-d H:i:s');
 			
 			if($data['id'] == $code){
-				$sql = "UPDATE area SET id={$code},name='{$area['area']}',abbreviation='{$area['abbreviation']}',fid={$fid},level={$type},uc_first='{$uc_first}',pinyin='{$pin_yin}',code={$urban_rural},modified='{$modified}',url='{$url}' WHERE id='{$code}'";
+				$sql = "UPDATE area SET id={$code},name='{$area['area']}',abbreviation='{$area['abbreviation']}',fid={$fid},level={$type},uc_first='{$uc_first}',pinyin='{$pin_yin}',url='{$url}' WHERE id='{$code}'";
 			}else{
-				$sql = "INSERT INTO area VALUES({$code},'{$area['area']}','{$area['abbreviation']}',$fid,$type,'{$uc_first}','{$pin_yin}',{$urban_rural},'{$modified}','{$created}','{$url}')";
+				$sql = "INSERT INTO area VALUES({$code},'{$area['area']}','{$area['abbreviation']}',$fid,$type,'{$uc_first}','{$pin_yin}','{$url}')";
 			}
 			static::$pdo->exec($sql);
 			
@@ -417,4 +442,4 @@ class Area
 	}
 }
 
-Area::getTown();
+Area::getCounty();
