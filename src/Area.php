@@ -283,22 +283,20 @@ class Area
 			$result         = static::$pdo->query($query_sql);
 			$data = $result->fetch(\PDO::FETCH_ASSOC);
 			
-
+			$url            = self::getUrl($code, $type);
+			$area           = self::getAbbreviation($value, $type, $fid);
 			
+			$pin_yin        = GetPinYin::getCharsPinYin($area['abbreviation']);
+			$uc_first       = strtoupper(mb_substr($pin_yin, 0, 1));
+			$urban_rural    = $type_code[$key] ?? 0;
+			$created        = $modified = date('Y-m-d H:i:s');
 			
 			if($data['id'] == $code){
-				# $sql = "UPDATE area SET id={$code},name='{$area['area']}',abbreviation='{$area['abbreviation']}',fid={$fid},level={$type},uc_first='{$uc_first}',pinyin='{$pin_yin}',code={$urban_rural},modified='{$modified}',url='{$url}' WHERE id='{$code}'";
+				$sql = "UPDATE area SET id={$code},name='{$area['area']}',abbreviation='{$area['abbreviation']}',fid={$fid},level={$type},uc_first='{$uc_first}',pinyin='{$pin_yin}',code={$urban_rural},modified='{$modified}',url='{$url}' WHERE id='{$code}'";
 			}else{
-				$url            = self::getUrl($code, $type);
-				$area           = self::getAbbreviation($value, $type, $fid);
-				
-				$pin_yin        = GetPinYin::getCharsPinYin($area['abbreviation']);
-				$uc_first       = strtoupper(mb_substr($pin_yin, 0, 1));
-				$urban_rural    = $type_code[$key] ?? 0;
-				$created        = $modified = date('Y-m-d H:i:s');
 				$sql = "INSERT INTO area VALUES({$code},'{$area['area']}','{$area['abbreviation']}',$fid,$type,'{$uc_first}','{$pin_yin}',{$urban_rural},'{$modified}','{$created}','{$url}')";
-				static::$pdo->exec($sql);
 			}
+			static::$pdo->exec($sql);
 			
 		}
 	}
