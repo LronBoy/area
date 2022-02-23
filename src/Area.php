@@ -204,14 +204,27 @@ class Area
 	 */
 	private static function getParentData($parent_level = self::LEVEL_PROVINCE)
 	{
-		if(!static::$pdo){self::init();}
-		$stmt = static::$pdo->query("select * from area where level={$parent_level}");
+		if(!static::$pdo){self::init();} // 231182415000 231182415598
+		$level = $parent_level+1;
+		$fid_stmt = static::$pdo->query("select * from area where level={$level} order by fid desc limit 1");
+		$fid_arr = $fid_stmt->fetch();
+		
+		if(isset($fid_arr) && !empty($fid_arr)){
+			$stmt = static::$pdo->query("select * from area where level={$parent_level} and id >= {$fid_arr['fid']}");
+		}else{
+			$stmt = static::$pdo->query("select * from area where level={$parent_level}");
+		}
+		
 		$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		if(empty($data)){
 			$area_name = self::$area_level[$parent_level];
 			$func_name = 'get'.$area_name;
 			self::$func_name();
-			$stmt = static::$pdo->query("select * from area where level={$parent_level}");
+			if(isset($fid_arr) && !empty($fid_arr)){
+				$stmt = static::$pdo->query("select * from area where level={$parent_level} and id >= {$fid_arr['fid']}");
+			}else{
+				$stmt = static::$pdo->query("select * from area where level={$parent_level}");
+			}
 			$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		}
 		return $data;
@@ -238,7 +251,7 @@ class Area
 				return $html_str;
 			}
 			
-			if(strpos($html_str['data'], '404 Not Found') !== false){
+			if(strpos($html_str['data'], '404 Not Found') !== false || strpos($html_str['data'], 'Page Not Found') !== false){
 				$url = self::$url.($now_year-1).'/';
 			}
 			self::$query_url = $url;
@@ -264,16 +277,31 @@ class Area
 			
 			# 获取远程请求数据
 			$html_str = HttpCurl::send(self::$query_url.$value['url']);
+//			$html_str = HttpCurl::send('http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2021/13/07/32/130732100.html');
 			
 			# 跳出不能访问链接
-			if(strpos($html_str['data'], '404 Not Found') !== false){
+			if(strpos($html_str['data'], '404 Not Found') !== false  || strpos($html_str['data'], 'Page Not Found') !== false){
 				continue;
 			}
 			
 			$temp_str = strstr(strstr($html_str['data'], self::$area_tr[$level]),'table', true);
-			$temp_str = str_replace('（','', $temp_str);
-			$temp_str = str_replace('）','', $temp_str);
-			preg_match_all('/[\x{4e00}-\x{9fff}]+/u', $temp_str, $matches_arr);
+			
+			if($level == self::LEVEL_VILLAGE){
+				$matches_arr[0] = [];
+				
+				$temp_arr = explode('</td></tr>',$temp_str);
+				foreach ($temp_arr as $v){
+					$str = substr($v, strrpos($v, '>')+1);
+					if(mb_strlen($str) <= 1){
+						continue;
+					}
+					$matches_arr[0][] = $str;
+				}
+			}else{
+				$temp_str = str_replace('（lang）','', $temp_str);
+				preg_match_all('/[^\x00-\xff]+/u', $temp_str, $matches_arr);
+			}
+			
 			if($level == self::LEVEL_PROVINCE){
 				preg_match_all('/\d+/', $temp_str, $matches_code_arr);
 			}else{
@@ -305,6 +333,10 @@ class Area
 			$code           = str_pad($code_arr[$key], 12, 0);
 			
 			print_r(date('Y-m-d H:i:s').'===【处理:】'.$code.'==='.$value."\n");
+			
+			if($code == '000000000000'){
+				exit;
+			}
 			
 			$query_sql      = "select * from area where id='{$code}'";
 			$result         = static::$pdo->query($query_sql);
@@ -442,4 +474,4 @@ class Area
 	}
 }
 
-Area::getCounty();
+Area::getProvince();
