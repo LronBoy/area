@@ -474,4 +474,4 @@ class Area
 	}
 }
 
-Area::getProvince();
+# Area::getProvince();
