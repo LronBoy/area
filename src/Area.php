@@ -473,4 +473,5 @@ class Area
 		return ['area' => $area_name, 'abbreviation' => $area_name];
 	}
 }
+
 # Area::getProvince();
