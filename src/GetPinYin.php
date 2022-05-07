@@ -95,7 +95,7 @@ class GetPinYin
 			throw new \Exception($err_arr[2], $err_arr[1]); // 抛出异常信息
 		}
 		
-		$data = $stmt->fetch(\PDO::FETCH_ASSOC); //查询单条数据 PDD::FETCH_ASSOC返回关联数组类型的数据, PDD::FETCH_NUM返回索引数组类型的数据
+		$data = $stmt->fetch(\PDO::FETCH_ASSOC); //查询单条数据 PDO::FETCH_ASSOC返回关联数组类型的数据, PDO::FETCH_NUM返回索引数组类型的数据
 		
 		if($data === false || (isset($data['pinyin']) && !$data['pinyin'])){
 			return $char;
